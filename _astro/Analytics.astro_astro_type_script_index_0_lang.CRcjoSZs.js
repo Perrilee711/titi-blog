@@ -1,0 +1,1 @@
+import{_ as t}from"./preload-helper.B3MPUHic.js";typeof window<"u"&&t(async()=>{const{injectSpeedInsights:e}=await import("./index.DQx_QkiK.js");return{injectSpeedInsights:e}},[]).then(({injectSpeedInsights:e})=>{e()});
