@@ -1,0 +1,542 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="view-transition" content="same-origin"><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="canonical" href="https://perrilee711.github.io/posts/2016/writing-good-bug-reports"><meta name="generator" content="Astro v5.16.6"><!-- General Meta Tags --><title>Writing Good Bug Reports | 蹄蹄</title><meta name="title" content="Writing Good Bug Reports | 蹄蹄"><meta name="description" content="Essential guide to writing effective bug reports that help developers understand, reproduce, and fix issues quickly and efficiently."><meta name="author" content="蹄蹄"><link rel="sitemap" href="/sitemap-index.xml"><!-- Open Graph / Facebook --><meta property="og:title" content="Writing Good Bug Reports | 蹄蹄"><meta property="og:description" content="Essential guide to writing effective bug reports that help developers understand, reproduce, and fix issues quickly and efficiently."><meta property="og:url" content="https://perrilee711.github.io/posts/2016/writing-good-bug-reports"><meta property="og:image" content="https://perrilee711.github.io/posts/2016/writing-good-bug-reports/index.png"><!-- Article Published/Modified time --><meta property="article:published_time" content="2016-09-13T12:00:00.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://perrilee711.github.io/posts/2016/writing-good-bug-reports"><meta property="twitter:title" content="Writing Good Bug Reports | 蹄蹄"><meta property="twitter:description" content="Essential guide to writing effective bug reports that help developers understand, reproduce, and fix issues quickly and efficiently."><meta property="twitter:image" content="https://perrilee711.github.io/posts/2016/writing-good-bug-reports/index.png"><!-- Google JSON-LD Structured data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Writing Good Bug Reports | 蹄蹄","image":"https://perrilee711.github.io/posts/2016/writing-good-bug-reports/index.png","datePublished":"2016-09-13T12:00:00.000Z","author":[{"@type":"Person","name":"蹄蹄","url":"https://perrilee711.github.io/perriblog/about"}]}</script><!-- Enable RSS feed auto-discovery  --><!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery --><link rel="alternate" type="application/rss+xml" title="蹄蹄" href="https://perrilee711.github.io/perriblog/rss.xml"><meta name="theme-color" content=""><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/titi-blog/_astro/ClientRouter.astro_astro_type_script_index_0_lang.QW52Ox2j.js"></script><script src="/toggle-theme.js"></script><!-- Domain-based markdown redirect --><script>
+      // Check if we're on steipete.md domain
+      const hostname = window.location.hostname;
+      if ((hostname === 'steipete.md' || hostname === 'www.steipete.md') && !window.location.pathname.endsWith('.md')) {
+        // Redirect to the .md version of the current page
+        const mdPath = window.location.pathname === '/' ? '/index.md' : window.location.pathname + '.md';
+        window.location.replace(mdPath + window.location.search + window.location.hash);
+      }
+    </script><!-- Twitter Widget Script --><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><style>@media (max-width: 640px){.newsletter-box[data-astro-cid-nbvfnxgh]{margin-left:-1rem;margin-right:-1rem;border-radius:0}}
+@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+</style>
+<link rel="stylesheet" href="/_astro/about.Dsfk5ee4.css">
+<style>.youtube-embed-container[data-astro-cid-vj4tpspi]{margin:2rem 0;position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden}.youtube-embed-container[data-astro-cid-vj4tpspi] iframe[data-astro-cid-vj4tpspi]{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+</style><style>[data-astro-transition-scope="astro-pu2sknsl-1"] { view-transition-name: writing-good-bug-reports; }@layer astro { ::view-transition-old(writing-good-bug-reports) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(writing-good-bug-reports) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(writing-good-bug-reports) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(writing-good-bug-reports) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-pu2sknsl-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-pu2sknsl-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-pu2sknsl-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-pu2sknsl-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-pu2sknsl-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-pu2sknsl-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-pu2sknsl-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-pu2sknsl-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-2"] { view-transition-name: i-os; }@layer astro { ::view-transition-old(i-os) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(i-os) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(i-os) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(i-os) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-3"] { view-transition-name: development; }@layer astro { ::view-transition-old(development) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(development) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(development) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(development) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body data-astro-cid-sckkx6r4>  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Writing Good Bug Reports","description":"Essential guide to writing effective bug reports that help developers understand, reproduce, and fix issues quickly and efficiently.","author":{"@type":"Person","name":"蹄蹄","url":"https://steipete.me/about"},"datePublished":"2016-09-13T12:00:00.000Z","dateModified":"2016-09-13T12:00:00.000Z","publisher":{"@type":"Person","name":"Peter Steinberger","logo":{"@type":"ImageObject","url":"https://steipete.me/peter-avatar.jpg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://perrilee711.github.io/posts/2016/writing-good-bug-reports"},"image":"https://perrilee711.github.io/posts/2016/writing-good-bug-reports/index.png","articleSection":"iOS","keywords":"iOS, Development","wordCount":2411,"timeRequired":"13 min read"}</script> <header> <a id="skip-to-content" href="#main-content" class="absolute -top-full left-16 z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4">
+Skip to content
+</a> <div id="nav-container" class="mx-auto flex max-w-3xl flex-col items-center justify-between sm:flex-row"> <div id="top-nav-wrap" class="relative flex w-full items-baseline justify-between bg-background p-4 sm:items-center sm:py-6"> <a href="/" class="absolute py-1 text-2xl leading-7 font-semibold whitespace-nowrap sm:static"> 蹄蹄 </a> <nav id="nav-menu" class="flex w-full flex-col items-center sm:ml-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"> <button id="menu-btn" class="focus-outline self-end p-2 sm:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden" id="close-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep" id="menu-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 6h16" /><path d="M7 12h13" /><path d="M10 18h10" /></svg> </button> <ul id="menu-items" class="mt-4 grid w-44 grid-cols-2 place-content-center gap-2 [&#38;>li>a]:block [&#38;>li>a]:px-4 [&#38;>li>a]:py-3 [&#38;>li>a]:text-center [&#38;>li>a]:font-medium [&#38;>li>a]:hover:text-accent sm:[&#38;>li>a]:px-2 sm:[&#38;>li>a]:py-1 hidden sm:mt-0 sm:ml-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0"> <li class="col-span-2"> <a href="/posts" class="active-nav">
+Posts
+</a> </li> <!-- <li class="col-span-2">
+            <a href="/tags" class:list={{ "active-nav": isActive("/tags") }}>
+              Tags
+            </a>
+          </li> --> <li class="col-span-2"> <a href="/titi-blog/about">
+About
+</a> </li>  <li class="col-span-1 flex items-center justify-center"> <a href="/titi-blog/search" class="group inline-block hover:text-accent focus-outline flex p-3 sm:p-1" aria-label="search" title="Search"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg> <span class="sr-only">Search</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <button id="theme-btn" class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" /><path d="M6.343 17.657l-1.414 1.414" /><path d="M6.343 6.343l-1.414 -1.414" /><path d="M17.657 6.343l1.414 -1.414" /><path d="M17.657 17.657l1.414 1.414" /><path d="M4 12h-2" /><path d="M12 4v-2" /><path d="M20 12h2" /><path d="M12 20v2" /></svg> </button> </li> </ul> </nav> </div> </div> <div class="max-w-3xl mx-auto px-4"> <hr class="border-border" aria-hidden="true"> </div> </header> <script type="module">function s(){const e=document.querySelector("#menu-btn"),t=document.querySelector("#menu-items"),n=document.querySelector("#menu-icon"),o=document.querySelector("#close-icon");!e||!t||!n||!o||e.addEventListener("click",()=>{const c=e.getAttribute("aria-expanded")==="true";e.setAttribute("aria-expanded",c?"false":"true"),e.setAttribute("aria-label",c?"Open Menu":"Close Menu"),t.classList.toggle("hidden"),n.classList.toggle("hidden"),o.classList.toggle("hidden")})}s();document.addEventListener("astro:after-swap",()=>{s()});</script> <script type="module">function o(){const t=document.querySelector("#back-button"),e=sessionStorage.getItem("backUrl");e&&t&&(t.href=e)}document.addEventListener("astro:page-load",o);o();</script> <main id="main-content" class="mx-auto w-full max-w-3xl px-4 pb-12 mt-8" data-pagefind-body data-astro-cid-vj4tpspi> <h1 class="inline-block text-2xl font-bold text-accent sm:text-3xl" data-astro-cid-vj4tpspi data-astro-transition-scope="astro-pu2sknsl-1"> Writing Good Bug Reports </h1> <div class="flex items-center justify-between gap-4 mt-2 mb-6" data-astro-cid-vj4tpspi> <div class="flex items-center gap-3" data-astro-cid-vj4tpspi> <div class="flex items-center gap-2 opacity-80"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-5 min-w-[1.25rem]"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg> <span class="sr-only">Published:</span> <span class="text-sm italic sm:text-base"> <time datetime="2016-09-13T12:00:00.000Z">13 Sep, 2016</time> </span> </div>  <span class="text-foreground/30" data-astro-cid-vj4tpspi>•</span> <span class="text-sm text-foreground/60" data-astro-cid-vj4tpspi>13 min read</span>  </div> <div class="opacity-80 max-sm:hidden"><span aria-hidden="true" class="max-sm:hidden">
+|
+</span><a class="space-x-1.5 hover:opacity-75" href="https://github.com/perri/perrilee711.github.io/perriblog/edit/main/src/content/blog/2016/writing-good-bug-reports.md" rel="noopener noreferrer" target="_blank"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span class="italic max-sm:text-sm sm:inline">Edit on GitHub</span></a></div> </div> <article id="article" class="mx-auto prose mt-6 max-w-3xl" data-astro-cid-vj4tpspi>  <p>At PSPDFKit, we provide an SDK to <a href="/blog/2016/pspdfkit-ios-6-0/">display and annotate PDFs</a>, for other people to integrate into their apps. There is a large set of API and therefore many things can go wrong. As you can imagine, things are quite busy on support as I work every day with developers reading through their bug reports. At the same time, we also forward many bugs to the engineers at Apple, as they ship even larger frameworks with even more API (e.g. UIKit), because all software has bugs.</p>
+<p>Over the years, this dual role has given me quite a perspective on what makes a good bug report. While this post is Apple-centric, many details can be applied to <em>any</em> sort of bug reporting.</p>
+<p>To quote Tanya Gupta from Apple:</p>
+<blockquote>
+<p>“Sometimes they say, well it’s a really obvious problem! I’m sure you have 12 copies of the bug. I am sure someone else has already filed it, should I still file a bug report? Yes, you should still file a bug report. Better have 5 copies of a bug than none at all. At Apple, if an issue is not tracked using a bug report, it essentially does not exist for us. Bug reports are like to-do items. We track everything using bug reports. Bugs, tasks, even big features that go into a particular release.”</p>
+</blockquote>
+<h3 id="why-you-should-care">Why you should care</h3>
+<p>While I’ve inevitably been pushed into more management over the years, I’m still an iOS developer at heart (and at night). iOS isn’t going anywhere. Our product isn’t going anywhere either. If you encounter a bug and just look the other way, that might be okay once. Do that 100 times and your code will be a minefield. People in your team will not understand why you’re doing things in such a weird way, and will tap into the same issues again and again. If you take time to analyze the issue and document it, the hack will now be maintainable and have a (manual) test case in the form of a sample. With every major iOS version, you can easily try the sample to check if the hack is still needed. It’s also documented for new people that join the team, so they don’t undo your crazy code because you had <a href="https://github.com/PSPDFKit-labs/radar.apple.com">reasons</a>. It also opens doors. If you care and are nice to people, you might see that they care as well and are nice to you too when you’re stuck.</p>
+<p>So, here we go - tips on filing good radars.</p>
+<h3 id="file-one-report-per-issue">File one report per issue</h3>
+<p>Don’t try to save time by writing multiple problems into one radar/ticket. One issue should always be one ticket. This makes it much easier to track the status and to move it to people internally.</p>
+<h3 id="add-the-selector-name-to-the-issue-title">Add the selector name to the issue title</h3>
+<p>Often Apple engineers try to search the HUGE radar database for dupes. Adding the selector to the title makes this much easier. Since all Apple frameworks are written in Objective-C (except Create ML which is still in beta as of June 2018), please use the Objective-C name.</p>
+<h3 id="make-a-short-runnable-sample">Make a short, runnable sample</h3>
+<p>Even if it’s trivial to reproduce. And until Swift really settles on features, <em>please</em> write it in Objective-C. Nothing is more annoying than getting a sample that doesn’t compile without manual edits. Delete everything that’s not important like the fillers that Xcode adds. Strip it down to just the bug. I usually don’t bother writing a test case because you don’t know how their architecture looks and chances are high that they don’t re-use the test (considering license issues alone), so a regular app is fine.</p>
+<p>At PSPDFKit, we usually mirror the samples that we attach to the radar <a href="https://github.com/PSPDFKit-labs/radar.apple.com">in a public GitHub repo</a> while noting that updated samples are available under this public repository. This doesn’t work for all radars: sometimes the bug report or the sample contain confidential information. But in most cases we can keep our radars public.</p>
+<p>Update (May 2019): With Swift 5 out, using Swift as the radar language for examples is now generally fine; changes are small enough that it should work. Not all engineers are fluent in Swift yet however, so your experience will vary.</p>
+<h3 id="make-it-really-obvious-to-trigger-the-issue">Make it <em>really</em> obvious to trigger the issue</h3>
+<p>I often add a big button named “Press me to crash” or “Tap for tears.” Make it obvious. An alert that explains the thing a bit more on load is also very very useful. Here’s how we explain <a href="http://openradar.appspot.com/20020818">rdar://20020818</a>.</p>
+<p><img src="/assets/img/2016/writing-good-bug-reports/radar-sample.png" alt="rdar://20020818" loading="lazy"></p>
+<h3 id="add-humor">Add humor</h3>
+<p>Bug reports don’t need to be dry! Sometimes they are because I’m in a hurry. Sometimes they are Dr. Who themed. Or have cat pictures. Or funny texts. Or they show a message that can only be read once a bug is fixed. I’m sure the engineer appreciates a bit of creativity - just don’t obscure the bug or make the sample harder to use. Whatever you do, it shouldn’t get in the way of their work.</p>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Made a Dr. Who themed radar about the cut off edges on UIAlertController. rdar://25572553 /cc <a href="https://twitter.com/smileyborg">@smileyborg</a> <a href="https://t.co/D9YWfdDyeC">pic.twitter.com/D9YWfdDyeC</a></p>— Peter Steinberger (@steipete) <a href="https://twitter.com/steipete/status/717627394211840000">April 6, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>But also be productive. Rants like “nothing works” doesn’t help anyone and just make it less likely that someone will work on your issue. You’re not working with a machine but with real humans here. Make good stuff, and you’ll get more responses.</p>
+<h3 id="be-concise">Be concise</h3>
+<p>Don’t write a novel. Try to explain the issue in concise terms and then optionally add a second block where you go into more details. What have you tried already to work around it? What assumptions do you have? Some of our radars are <a href="http://openradar.appspot.com/27843679">quite short - yet complete</a>.</p>
+<p>The report title is especially important. Be clear and succinct. It should be descriptive. See it as an advertisement for your cause. There will always be too many bugs to fix. If you want your problem to be fixed, make an effort, and write up a good article. Write it so that the engineer <em>wants</em> to open it, read it, and fix it.</p>
+<p>Keep in mind that the engineers might not have an efficient way to contact you. If they respond to a radar, this might be screened. And because screening can take up to a few days, try to write complete information that allows any engineer to reproduce the issue without further questions.</p>
+<h3 id="propose-a-workaround">Propose a workaround</h3>
+<p>Radars are also documentation, and other developers might find your radar, as long as you re-post it to <a href="http://openradar.appspot.com/">Open Radar</a>. If you have a workaround - add it! A good example of this is <a href="http://openradar.appspot.com/26295020">rdar://26295020 - Action sheets presented for links/numbers don’t work in presented view controllers</a>. The problematic code was duplicated in <a href="https://github.com/WebKit/webkit/blob/master/Source/WebKit2/UIProcess/API/Cocoa/WKWebView.mm">WKWebView, which is open source</a>. That made it quite easy to understand and then find the least invasive way to work around.</p>
+<p>You can use the open source <a href="http://www.quickradar.com/">QuickRadar Mac app</a> to make writing bug reports faster. It even allows cross-posting to Open Radar. It currently doesn’t play along with two-factor authentication, but I’m sure eventually someone will add that as well.</p>
+<h3 id="add-a-symbolicated-crash-log-if-applicable">Add a symbolicated crash log if applicable</h3>
+<p>Sometimes radars get pushed back as we’re reporting a crash and even include a sample project. The separate .crash file allows Apple to better categorize the crash and match it with existing data. Of course, not every radar is a crash.</p>
+<h3 id="timing-is-key">Timing is Key</h3>
+<p>Whenever Apple releases a new major version of its OS - test early! Chances that your bug gets fixed when you report it in Seed 1 are much more likely than when the GM is just a few weeks away.</p>
+<p><img src="/assets/img/2016/writing-good-bug-reports/timing-is-key.png" alt="Timing is Key" loading="lazy"></p>
+<h3 id="heres-an-incomplete-list-of-bugs-the-pspdfkit-team-wrote-this-year-crossed-out-radars-are-fixed">Here’s an <a href="http://openradar.appspot.com/search?query=PSPDFKit">incomplete list</a> of bugs the PSPDFKit team wrote this year (crossed out radars are fixed)</h3>
+<style>
+ul { font-size:14px; }
+</style>
+<ul>
+<li><a href="http://openradar.appspot.com/28827675">rdar://28827675 UIAppearance setter called multiple times</a></li>
+<li><a href="http://openradar.appspot.com/28799659">rdar://28799659 UIPasteboard needs asynchronous calls</a></li>
+<li><a href="http://openradar.appspot.com/28787338">rdar://28787338 Universal Clipboard causing apps to freeze for up to 15 seconds while it checks for data on the main thread</a></li>
+<li><a href="http://openradar.appspot.com/28776130">rdar://28776130 Allow preloading custom application data for UI Tests</a></li>
+<li><a href="http://openradar.appspot.com/28771678">rdar://28771678 UIPasteboard notifications don’t fire for other processes</a></li>
+<li><a href="http://openradar.appspot.com/28612548">rdar://28612548 ThreadSanitizer: use of an invalid mutex (e.g. uninitialized or destroyed) (CoreGraphics+0x34650f) in ripl_retain</a></li>
+<li><a href="http://openradar.appspot.com/28577248">rdar://28577248 Identifier of Apple Watch should be selectable or copyable via cmd-c in the Devices window. Had to use Accessibility Inspector to copy it. O.o</a></li>
+<li><a href="http://openradar.appspot.com/28281042">rdar://28281042 UIDocumentMenuViewController returns 100 on modalPresentationStyle on iOS 10. (UIActivityViewController was affected in iOS 10 beta, but is fixed as of GM)</a></li>
+<li><a href="http://openradar.appspot.com/28275291">rdar://28275291 UIMenuController is leaking out blur background. Discussed at WWDC 2016. Hard to reproduce. Always sticks in the eye.</a></li>
+<li><a href="http://openradar.appspot.com/28252672">rdar://28252672 Crash: Double-Free when using Core Image (deep in CoreImage /libFosl_dynamic)</a></li>
+<li><a href="http://openradar.appspot.com/28252227">rdar://28252227 Incorrect App Store rejections for name clashes on methods that happen to be named like private API (especially bad for us, as we ship an SDK.)</a></li>
+<li><a href="http://openradar.appspot.com/28250871">rdar://28250871 CoreGraphics PDF backend has a confusing log</a></li>
+<li><a href="http://openradar.appspot.com/28250805">rdar://28250805 Document Xcode config settings to enable Clang Sanitizers</a></li>
+<li><a href="http://openradar.appspot.com/radar?id=4926683987574784">rdar://28167779 UICollectionView performBatchUpdates can trigger a crash if the collection view is flagged for layout</a></li>
+<li><a href="http://openradar.appspot.com/28103342">rdar://28103342 ASAN_OPTIONS no longer settable when running tests within Xcode. (Regression)</a></li>
+<li><a href="http://openradar.appspot.com/28053584">rdar://28053584 Xcode/Clang: certain typedefs for Objective–C generics break KVC</a></li>
+<li><a href="http://openradar.appspot.com/radar?id=6141940152139776">rdar://27968875 Documents Inbox directory cannot be removed</a></li>
+<li><a href="http://openradar.appspot.com/27844864">rdar://27844864 CoreText.framework is missing for the watchOS Simulator (but is available on the device platform SDK)</a></li>
+<li><a href="http://openradar.appspot.com/27844227">rdar://27844227 Xcode is unusably slow during indexing</a></li>
+<li><a href="http://openradar.appspot.com/27843710">rdar://27843710 Expose AudioToolbox on watchOS</a></li>
+<li><a href="http://openradar.appspot.com/27843679">rdar://27843679 Expose QuartzCore on watchOS</a></li>
+<li><del>rdar://27526025 Unable to ship Bitcode for arm64 because of a linker bug</del> (Not on OpenRadar because we had to send many internal files to track that one down)</li>
+<li><a href="http://openradar.appspot.com/27844971">rdar://27844971 Keychain fails on iOS 10 simulator</a></li>
+<li><a href="http://openradar.appspot.com/radar?id=5064986766344192">rdar://27844889 UIDocumentPickerViewController blocks UI while importing files from iCloud</a></li>
+<li><a href="http://openradar.appspot.com/radar?id=6134041120079872">rdar://27822079 Linking fails due to assertion failure (cfiStartsArray[i] != cfiStartsArray[i-1]) with incremental LTO</a></li>
+<li><a href="http://openradar.appspot.com/radar?id=6109159569227776">rdar://27821239 Tests run fails because test host is installing or uninstalling</a></li>
+<li><a href="http://openradar.appspot.com/radar?id=4941483320803328">rdar://27820992 Duplicate PLBuildVersion symbol</a></li>
+<li><a href="http://openradar.appspot.com/radar?id=5025988412964864">rdar://27790746 UIDocumentMenuViewController double height status bar issues</a></li>
+<li><a href="http://openradar.appspot.com/radar?id=4994185790750720">rdar://27750195 Xcode warns about mismatched iCloud containers with per-configuration bundle IDs</a></li>
+<li><a href="http://openradar.appspot.com/radar?id=6073824336412672">rdar://27471372 UIDocumentMenuViewController Auto Layout error</a></li>
+<li><a href="http://openradar.appspot.com/27448912">rdar://27448912 Can’t show activity view controller filling a form sheet</a></li>
+<li><a href="http://openradar.appspot.com/27448488">rdar://27448488 Reading an alert controller’s popoverPresentationController property changes behavior</a></li>
+<li><a href="http://openradar.appspot.com/27261367">rdar://27261367 Breaking changing on UIActivityViewController when checking modalPresentationStyle leads to crash</a></li>
+<li><a href="http://openradar.appspot.com/27192338">rdar://27192338 Detect access to UIKit from non-main-thread as a debugging feature</a></li>
+<li><a href="http://openradar.appspot.com/radar?id=6138065772871680">rdar://27124693 Improve Xcode handling of external project changes</a></li>
+<li><a href="http://openradar.appspot.com/27076273">rdar://27076273 Action sheets shown on a popover-presented controller do not preserve their position after rotation</a></li>
+<li><a href="http://openradar.appspot.com/26995465">rdar://26995465 Bring Night Shift to macOS</a></li>
+<li><a href="http://openradar.appspot.com/26972564">rdar://26972564 Xcode project update checker does not correctly handle version numbers</a></li>
+<li><a href="http://openradar.appspot.com/26954460">rdar://26954460 Clarify if creation of UIImage on background threads is safe</a></li>
+<li><a href="http://openradar.appspot.com/26939107">rdar://26939107 Expose verify state</a></li>
+<li><a href="http://openradar.appspot.com/26900741">rdar://26900741 Radar should send notification when duplicates change status</a></li>
+<li><a href="http://openradar.appspot.com/26900542">rdar://26900542 Allow to view radars from company members</a></li>
+<li><a href="http://openradar.appspot.com/26897226">rdar://26897226 NSBundle’s path resolution is broken with unicode</a></li>
+<li><a href="http://openradar.appspot.com/26893205">rdar://26893205 Previous versions to Xcode should be able to deploy to future iOS versions</a></li>
+<li><a href="http://openradar.appspot.com/26667447"><del>rdar://26667447 Game Center on OS X 10.11.5 is a little bit broken</del></a></li>
+<li><a href="http://openradar.appspot.com/26623090">rdar://26623090 Default table view cells don’t size properly</a></li>
+<li><a href="http://openradar.appspot.com/26516120"><del>rdar://26516120 UIGraphicsGetImageFromCurrentImageContext is __null_unspecified. Why?</del></a></li>
+<li><a href="http://openradar.appspot.com/26295020"><del>rdar://26295020 Action sheets presented for links/numbers don’t work in presented view controllers</del></a></li>
+<li><a href="http://openradar.appspot.com/26227380">rdar://26227380 UITintColorVisitor causes exponentially worsening performance when adding subviews</a></li>
+<li><a href="http://openradar.appspot.com/26215866">rdar://26215866 Clang Analyzer is crashing in Xcode 7.3.1 (exit code 254, files attached)</a></li>
+<li><a href="http://openradar.appspot.com/26136992">rdar://26136992 There should be API to read the text speed from UIAccessibility settings</a></li>
+<li><a href="http://openradar.appspot.com/25961521">rdar://25961521 SFSafariViewController renders a blank white screen for 100–300ms upon first presentation</a></li>
+<li><a href="http://openradar.appspot.com/25873723">rdar://25873723 UICollectionView crashes when invalidating non existing header</a></li>
+<li><a href="http://openradar.appspot.com/25809832">rdar://25809832 left bar button items have gap to the back button</a></li>
+<li><a href="http://openradar.appspot.com/25737301"><del>rdar://25737301 NS_NOESCAPE</del></a></li>
+<li><a href="http://openradar.appspot.com/25733862">rdar://25733862 New JS alerts: destroyed keyboard navigation</a></li>
+<li><a href="http://openradar.appspot.com/25656808">rdar://25656808 Impove default indentation for array and dictionary literals</a></li>
+<li><a href="http://openradar.appspot.com/25595715">rdar://25595715 +[NSKeyedUnarchiver unarchiveTopLevelObjectWithData:error:] undocumented</a></li>
+<li><a href="http://openradar.appspot.com/25595684">rdar://25595684 XCUIElementType triggers partial availability warning inside XCTest</a></li>
+<li><a href="http://openradar.appspot.com/25572553">rdar://25572553 UIAlertController doesn’t lay itself out correctly if no title is set - weird edges ahead!</a></li>
+<li><a href="http://openradar.appspot.com/25550676">rdar://25550676 Custom UINavigationItem is ignored if ViewController is initialized via Storyboard</a></li>
+<li><a href="http://openradar.appspot.com/25337169">rdar://25337169 UI frozen after rotating due to animation completion handler not called</a></li>
+<li><a href="http://openradar.appspot.com/radar?id=6702037056094208">rdar://25337955 UICollectionViewCell should be extended with a setSelected:animated: method</a></li>
+<li><a href="http://openradar.appspot.com/25311044"><del>rdar://25311044 The visual debugger fails because of an assertion in UIKit’s UITextView when auto layout is not used</del></a></li>
+<li><a href="http://openradar.appspot.com/25235882">rdar://25235882 UICollectionViewFlowLayout movement has incorrect sizing behavior</a></li>
+<li><a href="http://openradar.appspot.com/25214965">rdar://25214965 Open Quickly showing generated interface is annoying</a></li>
+<li><a href="http://openradar.appspot.com/24972653">rdar://24972653 Build fails with address sanitizer feature enabled and custom CC</a></li>
+<li><a href="http://openradar.appspot.com/24298174">rdar://24298174 [UIReferenceLibraryViewController dictionaryHasDefinitionForTerm:] is unusable slow</a></li>
+<li><a href="http://openradar.appspot.com/24196184">rdar://24196184 Allow better keyboard states detection</a></li>
+<li><a href="http://openradar.appspot.com/27447948"><del>rdar://27447948 xcodebuild test hangs when piping it’s output</del></a></li>
+<li><a href="http://openradar.appspot.com/24135531">rdar://24135531 Initial layout is caught in animation block when keyboard frame change is triggered when a view in a form sheet will appearing</a></li>
+</ul>
+<h3 id="radar-works">Radar works</h3>
+<p>Filing radars is worth it, even if it seems like a black hole at the first look. Sometimes it takes a while, but critical issues often get fixed.</p>
+<p><img src="/assets/img/2016/writing-good-bug-reports/radar-works.png" alt="Radar works" loading="lazy"></p>
+<h3 id="i-really-need-this-fixed">I really need this fixed!</h3>
+<p>If you have a critical bug that you need to work around, write it up and then <a href="https://developer.apple.com/account/?view=support">submit a DTS/TSI (Technical Support Incident).</a>
+This means that a human will look at the issue within the next 1-2 weeks. There’s no guarantee that you’ll get a workaround, but it often helps, and it certainly brings attention to the radar. We’re only doing this in rare cases, since Apple only has a few resources on TSI and we don’t want to be annoying for non-critical radars and, by default, you only have two tickets per account. With $249 USD for a 5-Pack, they’re extremely cheap for the value you get.</p>
+<h3 id="forums">Forums</h3>
+<p>The <a href="https://forums.developer.apple.com">Apple Developer Forums</a> are also worth considering. The noise ratio is very high, but there are always a few Apple employees around that might be able to help. As always, the more care you put into documenting your problem, and providing a sample project, the more likely it is that somebody can help you.</p>
+<h3 id="learn-more">Learn More</h3>
+<p>Watch the <a href="https://developer.apple.com/videos/play/wwdc2013/415/">Maximizing Apple Development Resources presentation from WWDC 2013</a> to learn more where to find documentation and how to file a bug report.</p>
+<p><a href="https://developer.apple.com/library/ios/technotes/tn2239/_index.html">TN2239, iOS Debugging Magic</a>, <a href="https://developer.apple.com/library/mac/technotes/tn2124/_index.html">TN2124, Mac OS X Debugging Magic</a> and <a href="https://developer.apple.com/library/ios/technotes/tn2151/_index.html">TN2151, Understanding and Analyzing iOS Application Crash Reports</a> also contain a treasure of information that will help you to identify, understand and work around issues.</p> </article> <div class="newsletter-box bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg p-6 my-8" data-astro-cid-nbvfnxgh> <p class="text-sm text-gray-600 dark:text-gray-400 mb-4" data-astro-cid-nbvfnxgh>
+New posts, shipping stories, and nerdy links straight to your inbox.
+</p> <form action="https://buttondown.com/api/emails/embed-subscribe/steipete" method="post" target="_blank" class="flex flex-col sm:flex-row gap-3" data-astro-cid-nbvfnxgh> <input type="hidden" name="tag" value="steipete" data-astro-cid-nbvfnxgh> <input type="text" name="name" placeholder="Your Name" class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent" data-astro-cid-nbvfnxgh> <input type="email" name="email" placeholder="Your Email" required class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent" data-astro-cid-nbvfnxgh> <button type="submit" class="px-6 py-2 bg-accent rounded-md hover:bg-accent/90 transition-colors font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2" style="color: white;" data-astro-cid-nbvfnxgh>
+Subscribe
+</button> </form> <p class="text-xs text-gray-500 dark:text-gray-400 mt-3" data-astro-cid-nbvfnxgh>
+2× per month, pure signal, zero fluff.
+</p> </div>  <hr class="my-8 border-dashed" data-astro-cid-vj4tpspi> <div class="opacity-80 sm:hidden"><span aria-hidden="true" class="max-sm:hidden">
+|
+</span><a class="space-x-1.5 hover:opacity-75" href="https://github.com/perri/perrilee711.github.io/perriblog/edit/main/src/content/blog/2016/writing-good-bug-reports.md" rel="noopener noreferrer" target="_blank"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span class="italic max-sm:text-sm sm:inline">Edit on GitHub</span></a></div> <ul class="mt-4 mb-8 sm:my-8" data-astro-cid-vj4tpspi> <li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/titi-blog/tags/i-os/" class="relative pr-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 text-sm" data-astro-transition-scope="astro-36ssibgs-2"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -mr-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>iOS</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/titi-blog/tags/development/" class="relative pr-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 text-sm" data-astro-transition-scope="astro-36ssibgs-3"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -mr-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Development</span> </a> </li> </ul> <div class="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-end sm:gap-4" data-astro-cid-vj4tpspi> <div class="flex flex-col flex-wrap items-center justify-center gap-2 sm:gap-1 sm:items-start"> <span class="italic">Share this post on:</span> <div class="text-center flex flex-wrap gap-1"> <a href="https://x.com/intent/post?url=https://perrilee711.github.io/posts/2016/writing-good-bug-reports" class="group inline-block hover:text-accent p-3 sm:p-2 hover:rotate-6" title="Share this post on X"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-8 sm:size-6 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg><span class="sr-only">Share this post on X</span> </a><a href="https://bsky.app/intent/compose?text=https://perrilee711.github.io/posts/2016/writing-good-bug-reports" class="group inline-block hover:text-accent p-3 sm:p-2 hover:rotate-6" title="Share this post on BlueSky"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-8 sm:size-6 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent">
+  <path d="M12 11.5c-.87-1.69-3.24-4.84-5.44-6.4-2.1-1.48-2.89-1.24-3.42-1.01-.62.27-.72 1.17-.72 1.72 0 .55.3 4.52.5 5.18.65 2.19 2.97 2.93 5.1 2.69.11-.02.22-.03.33-.04-.11.01-.22.03-.33.04-3.13.47-5.91 1.61-2.26 5.67 4.01 4.15 5.5-.89 6.26-3.45.76 2.56 1.64 7.42 6.19 3.45 3.41-3.45.94-5.2-2.19-5.67-.11-.01-.22-.03-.33-.04.11.01.22.02.33.04 2.14.24 4.45-.5 5.1-2.69.2-.66.5-4.63.5-5.18 0-.55-.11-1.49-.72-1.77-.53-.24-1.33-.5-3.44.99-2.2 1.56-4.57 3.71-5.44 6.4Z" stroke-width="1.815" />
+</svg><span class="sr-only">Share this post on BlueSky</span> </a><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://perrilee711.github.io/posts/2016/writing-good-bug-reports" class="group inline-block hover:text-accent p-3 sm:p-2 hover:rotate-6" title="Share this post on LinkedIn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-8 sm:size-6 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" /></svg><span class="sr-only">Share this post on LinkedIn</span> </a><a href="https://wa.me/?text=https://perrilee711.github.io/posts/2016/writing-good-bug-reports" class="group inline-block hover:text-accent p-3 sm:p-2 hover:rotate-6" title="Share this post via WhatsApp"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-8 sm:size-6 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></svg><span class="sr-only">Share this post via WhatsApp</span> </a><a href="https://www.facebook.com/sharer.php?u=https://perrilee711.github.io/posts/2016/writing-good-bug-reports" class="group inline-block hover:text-accent p-3 sm:p-2 hover:rotate-6" title="Share this post on Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-8 sm:size-6 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg><span class="sr-only">Share this post on Facebook</span> </a><a href="https://t.me/share/url?url=https://perrilee711.github.io/posts/2016/writing-good-bug-reports" class="group inline-block hover:text-accent p-3 sm:p-2 hover:rotate-6" title="Share this post via Telegram"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-8 sm:size-6 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg><span class="sr-only">Share this post via Telegram</span> </a><a href="https://pinterest.com/pin/create/button/?url=https://perrilee711.github.io/posts/2016/writing-good-bug-reports" class="group inline-block hover:text-accent p-3 sm:p-2 hover:rotate-6" title="Share this post on Pinterest"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-8 sm:size-6 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 20l4 -9" /><path d="M10.7 14c.437 1.263 1.43 2 2.55 2c2.071 0 3.75 -1.554 3.75 -4a5 5 0 1 0 -9.7 1.7" /><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg><span class="sr-only">Share this post on Pinterest</span> </a><a href="mailto:?subject=See%20this%20post&#38;body=https://perrilee711.github.io/posts/2016/writing-good-bug-reports" class="group inline-block hover:text-accent p-3 sm:p-2 hover:rotate-6" title="Share this post via email"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-8 sm:size-6 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg><span class="sr-only">Share this post via email</span> </a> </div> </div> <button id="back-to-top" class="focus-outline py-1 whitespace-nowrap hover:opacity-75" data-astro-cid-vj4tpspi> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block rotate-90" data-astro-cid-vj4tpspi="true"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <span data-astro-cid-vj4tpspi>Back to Top</span> </button> </div> <hr class="my-6 border-dashed" data-astro-cid-vj4tpspi> <!-- Previous/Next Post Buttons --> <div data-pagefind-ignore class="flex flex-col sm:flex-row justify-between gap-6" data-prev-url="/posts/2016/hiring-a-distributed-team" data-next-url="/posts/2016/real-time-collaboration" data-astro-cid-vj4tpspi> <a href="/titi-blog/posts/2016/hiring-a-distributed-team" class="flex gap-2 hover:opacity-75 items-start" id="prev-post-link" data-astro-cid-vj4tpspi> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-shrink-0 mt-0.5" data-astro-cid-vj4tpspi="true"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <div class="min-w-0" data-astro-cid-vj4tpspi> <span class="block text-sm text-foreground/70" data-astro-cid-vj4tpspi>Previous Post</span> <div class="text-accent/85" data-astro-cid-vj4tpspi>Hiring a distributed team</div> </div> </a> <a href="/titi-blog/posts/2016/real-time-collaboration" class="flex gap-2 hover:opacity-75 items-start justify-end text-right ml-auto" id="next-post-link" data-astro-cid-vj4tpspi> <div class="min-w-0" data-astro-cid-vj4tpspi> <span class="block text-sm text-foreground/70" data-astro-cid-vj4tpspi>Next Post</span> <div class="text-accent/85" data-astro-cid-vj4tpspi>Real-time collaboration, Apple, and you</div> </div> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-shrink-0 mt-0.5" data-astro-cid-vj4tpspi="true"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 6l6 6l-6 6" /></svg> </a> </div> </main> <footer class="w-full mt-auto"> <div class="max-w-3xl mx-auto px-0"> <hr class="border-border" aria-hidden="true"> </div> <div class="flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4"> <div class="flex-wrap justify-center gap-1 flex"> <a href="https://github.com/perri" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title=" 蹄蹄 on Github"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg><span class="sr-only"> 蹄蹄 on Github</span> </a><a href="https://x.com/perri" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="蹄蹄 on X"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg><span class="sr-only">蹄蹄 on X</span> </a><a href="https://bsky.app/profile/perrilee711.github.io/perriblog" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="蹄蹄 on BlueSky"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110">
+  <path d="M12 11.5c-.87-1.69-3.24-4.84-5.44-6.4-2.1-1.48-2.89-1.24-3.42-1.01-.62.27-.72 1.17-.72 1.72 0 .55.3 4.52.5 5.18.65 2.19 2.97 2.93 5.1 2.69.11-.02.22-.03.33-.04-.11.01-.22.03-.33.04-3.13.47-5.91 1.61-2.26 5.67 4.01 4.15 5.5-.89 6.26-3.45.76 2.56 1.64 7.42 6.19 3.45 3.41-3.45.94-5.2-2.19-5.67-.11-.01-.22-.03-.33-.04.11.01.22.02.33.04 2.14.24 4.45-.5 5.1-2.69.2-.66.5-4.63.5-5.18 0-.55-.11-1.49-.72-1.77-.53-.24-1.33-.5-3.44.99-2.2 1.56-4.57 3.71-5.44 6.4Z" stroke-width="1.815" />
+</svg><span class="sr-only">蹄蹄 on BlueSky</span> </a><a href="https://www.linkedin.com/in/perri/" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="蹄蹄 on LinkedIn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" /></svg><span class="sr-only">蹄蹄 on LinkedIn</span> </a><a href="mailto:peter@perrilee711.github.io/perriblog" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="Send an email to 蹄蹄"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg><span class="sr-only">Send an email to 蹄蹄</span> </a> </div> <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row"> <a href="https://github.com/steipete/steipete.me" target="_blank" rel="noopener noreferrer" class="hover:text-accent">
+Steal this post ➜ CC BY 4.0 · Code MIT
+</a> </div> </div> </footer>  <!-- Vercel Analytics --><script type="module" src="/titi-blog/_astro/Analytics.astro_astro_type_script_index_0_lang.iMTEyByK.js"></script> <!-- Vercel Speed Insights --><script type="module" src="/titi-blog/_astro/Analytics.astro_astro_type_script_index_1_lang.B9nzKlec.js"></script> </body></html> <script data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+  updateScrollProgress();
+
+  /** Attaches links to headings in the document,
+   *  allowing sharing of sections easily */
+  function addHeadingLinks() {
+    const headings = Array.from(
+      document.querySelectorAll("h2, h3, h4, h5, h6"),
+    );
+    for (const heading of headings) {
+      heading.classList.add("group");
+      const link = document.createElement("a");
+      link.className =
+        "heading-link ml-2 opacity-0 group-hover:opacity-100 focus:opacity-100";
+      link.href = "#" + heading.id;
+
+      const span = document.createElement("span");
+      span.ariaHidden = "true";
+      span.innerText = "#";
+      link.appendChild(span);
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  /** Attaches copy buttons to code blocks in the document,
+   * allowing users to copy code easily. */
+  function attachCopyButtons() {
+    const copyButtonLabel = "Copy";
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      const copyButton = document.createElement("button");
+      copyButton.className =
+        "copy-code absolute right-3 -top-3 rounded bg-muted px-2 py-1 text-xs leading-4 text-foreground font-medium";
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      // wrap codebock with relative parent element
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      // visual feedback that task is completed
+      button.innerText = "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /** Scrolls the document to the top when
+   * the "Back to Top" button is clicked. */
+  function backToTop() {
+    document.querySelector("#back-to-top")?.addEventListener("click", () => {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+  }
+  backToTop();
+
+  /* Go to page start after page swap */
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" }),
+  );
+
+  /** Add lazy loading to all images in the article */
+  function addLazyLoading() {
+    const article = document.querySelector("#article");
+    if (!article) return;
+    
+    const images = article.querySelectorAll("img:not([loading])");
+    images.forEach((img) => {
+      img.setAttribute("loading", "lazy");
+    });
+  }
+  addLazyLoading();
+
+  /** Keyboard navigation for posts */
+  function setupKeyboardNavigation() {
+    const navContainer = document.querySelector('[data-prev-url]');
+    if (!navContainer) return;
+    
+    const prevUrl = navContainer.getAttribute('data-prev-url');
+    const nextUrl = navContainer.getAttribute('data-next-url');
+    
+    document.addEventListener('keydown', (e) => {
+      // Ignore if user is typing in an input, textarea, or contenteditable
+      if (e.target.matches('input, textarea, [contenteditable="true"]')) return;
+      
+      // J key for next post
+      if (e.key === 'j' && nextUrl) {
+        window.location.href = nextUrl;
+      }
+      // K key for previous post
+      else if (e.key === 'k' && prevUrl) {
+        window.location.href = prevUrl;
+      }
+    });
+  }
+  setupKeyboardNavigation();
+
+  /** Process YouTube and Twitter embeds */
+  function processEmbeds() {
+    const article = document.querySelector("#article");
+    if (!article) return;
+
+    // Look for YouTube embeds
+    const youtubeEmbedRegex = /\{% youtube (https:\/\/[^\s]+|[a-zA-Z0-9_-]+) %\}/g;
+    
+    let foundYoutubeEmbeds = false;
+    
+    // Helper to extract a YouTube video ID from various URL formats
+    const extractYouTubeId = (input) => {
+      let videoId = input;
+      try {
+        if (videoId.includes("youtube.com/watch")) {
+          const url = new URL(videoId);
+          videoId = url.searchParams.get("v") || "";
+        } else if (videoId.includes("youtu.be/")) {
+          videoId = videoId.split("youtu.be/")[1]?.split("?")[0] || "";
+        } else if (videoId.includes("youtube.com/embed/")) {
+          videoId = videoId.split("youtube.com/embed/")[1]?.split("?")[0] || "";
+        }
+      } catch (_) {
+        // If URL parsing fails, fall back to the raw input
+      }
+      return videoId;
+    };
+
+    // 1) Pre-pass: replace whole-paragraph shortcodes (most common case)
+    const pNodes = article.querySelectorAll("p");
+    pNodes.forEach((p) => {
+      const text = (p.textContent || "").trim();
+      const ytMatch = text.match(/\{% youtube (https:\/\/[^\s]+|[a-zA-Z0-9_-]+) %\}/);
+
+      if (ytMatch && ytMatch[1]) {
+        foundYoutubeEmbeds = true;
+        const videoId = extractYouTubeId(ytMatch[1]);
+        const container = document.createElement("div");
+        container.className = "youtube-embed-container";
+        container.innerHTML = `
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/${videoId}"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        `;
+        p.replaceWith(container);
+      }
+    });
+
+    // 2) Fallback: process any remaining text nodes that still contain shortcodes
+    const walker = document.createTreeWalker(
+      article,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false,
+    );
+
+    const textNodes = [];
+    let node;
+    while ((node = walker.nextNode())) {
+      textNodes.push(node);
+    }
+
+    textNodes.forEach((textNode) => {
+      let content = textNode.textContent;
+      let hasChanges = false;
+
+      // Process YouTube embeds
+      content = content.replace(youtubeEmbedRegex, (match, videoId) => {
+        foundYoutubeEmbeds = true;
+        hasChanges = true;
+        videoId = extractYouTubeId(videoId);
+
+        return `<div class="youtube-embed-container">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/${videoId}"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>`;
+      });
+
+      if (hasChanges) {
+        // Replace the text node with HTML content
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = content;
+
+        // Replace the text node with the new HTML elements
+        const parent = textNode.parentNode;
+        while (tempDiv.firstChild) {
+          parent.insertBefore(tempDiv.firstChild, textNode);
+        }
+        parent.removeChild(textNode);
+      }
+    });
+  }
+
+  // Run the embed processing
+  processEmbeds();
+  
+  // Also run after astro navigation
+  document.addEventListener("astro:page-load", processEmbeds);
+</script> 
