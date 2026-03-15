@@ -1,5 +1,5 @@
 # build output
-dist/
+# dist/  # 注意：GitHub Pages需要这个目录
 # generated types
 .astro/
 
