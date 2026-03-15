@@ -273,13 +273,15 @@ body {
 .container { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
 .section { padding: 6rem 0; position: relative; z-index: 1; }
 .section-title {
+  text-align: center;
   font-family: 'Cormorant Garamond', serif;
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 4px;
   text-transform: uppercase;
   color: var(--warm-gray);
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
+  padding-top: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--oat);
 }
@@ -399,11 +401,13 @@ body {
 
 /* Featured Card */
 .featured-card {
+  max-width: 960px;
+  margin: 0 auto;
   background: var(--card-bg);
   padding: 3rem;
   display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 2.5rem;
+  grid-template-columns: 280px 1fr;
+  gap: 3rem;
   box-shadow: 
     0 4px 30px rgba(107, 94, 84, 0.08),
     0 1px 3px rgba(107, 94, 84, 0.04);
@@ -543,7 +547,8 @@ body {
 .timeline-item { 
   position: relative; 
   padding-left: 2rem; 
-  margin-bottom: 3rem; 
+  margin-bottom: 3.5rem;
+  padding-top: 1rem; 
 }
 .timeline-item::before {
   content: '';
@@ -674,7 +679,9 @@ body {
   .hero-container { grid-template-columns: 1fr; text-align: center; }
   .hero-left { margin: 0 auto; }
   .hero-right { display: none; }
-  .featured-card { grid-template-columns: 1fr; text-align: center; }
+  .featured-card {
+  max-width: 960px;
+  margin: 0 auto; grid-template-columns: 1fr; text-align: center; }
   .featured-art { width: 140px; margin: 0 auto; }
   .play-btn { align-self: center; }
   .notes-wrapper { grid-template-columns: 1fr; }
@@ -684,7 +691,9 @@ body {
 @media (max-width: 640px) {
   .hero { padding: 3rem 1.5rem; min-height: auto; }
   .hero h1 { font-size: 2.5rem; }
-  .featured-card { padding: 1.5rem; }
+  .featured-card {
+  max-width: 960px;
+  margin: 0 auto; padding: 1.5rem; }
   .track-item { padding: 1rem; gap: 1rem; }
   .section { padding: 4rem 0; }
 }
