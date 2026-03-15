@@ -1,21 +1,27 @@
 ---
 // Analytics component for Vercel Analytics and Speed Insights
+// Only loads in Vercel production environment
 ---
 
 <!-- Vercel Analytics -->
 <script>
-  if (typeof window !== 'undefined' && import.meta.env.PROD) {
+  // Only load if we're on Vercel (check for vercel runtime)
+  if (typeof window !== 'undefined' && import.meta.env.PROD && import.meta.env.VERCEL) {
     import('@vercel/analytics').then(({ inject }) => {
       inject();
+    }).catch(() => {
+      // Silently fail if not on Vercel
     });
   }
 </script>
 
 <!-- Vercel Speed Insights -->
 <script>
-  if (typeof window !== 'undefined' && import.meta.env.PROD) {
+  if (typeof window !== 'undefined' && import.meta.env.PROD && import.meta.env.VERCEL) {
     import('@vercel/speed-insights').then(({ injectSpeedInsights }) => {
       injectSpeedInsights();
+    }).catch(() => {
+      // Silently fail if not on Vercel
     });
   }
 </script>

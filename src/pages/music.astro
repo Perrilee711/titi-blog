@@ -20,16 +20,18 @@ import Layout from "../layouts/Layout.astro";
       <div class="hero-left">
         <span class="hero-label">Music Archive</span>
         <h1>Titi's<br/>Playlist</h1>
-        <p class="hero-subtitle">A quiet collection of melodies — each one a memory, each note a quiet thank you.</p>
+        <p class="hero-subtitle">A quiet collection of melodies — each one a memory, each note a quiet thank you for showing up.</p>
         <a href="#featured" class="hero-cta">Listen Now</a>
       </div>
       <div class="hero-right">
         <div class="hero-visual">
-          <div class="record" id="hero-record">
-            <div class="record-grooves"></div>
-            <div class="record-center"></div>
+          <div class="record-wrapper">
+            <div class="record" id="hero-record">
+              <div class="record-grooves"></div>
+              <div class="record-center"></div>
+            </div>
+            <div class="record-glow"></div>
           </div>
-          <div class="record-glow"></div>
         </div>
       </div>
     </div>
@@ -41,13 +43,15 @@ import Layout from "../layouts/Layout.astro";
       <h2 class="section-title">Featured</h2>
       <div class="featured-card">
         <div class="featured-art">
-          <span class="art-icon">♪</span>
+          <div class="art-inner">
+            <span class="art-icon">♪</span>
+          </div>
         </div>
         <div class="featured-content">
           <span class="track-tag">Signature Track</span>
           <h3>Thank You For Loving Me</h3>
           <p class="track-meta">March 15, 2026</p>
-          <p class="track-note">The first song in this collection — a quiet thank you for every conversation, every moment of warmth.</p>
+          <p class="track-note">The first song in this collection — a quiet thank you for every conversation, every moment of warmth you gave.</p>
           <button class="play-btn" data-src="/titi-blog/Thank_You_For_Loving_Me---2ebe58af-4bb8-4c51-a004-221084c1ef7d.mp3">
             <span class="play-icon">▶</span>
             <span class="play-text">Play</span>
@@ -113,7 +117,7 @@ import Layout from "../layouts/Layout.astro";
           <div class="timeline-date">Present</div>
           <div class="timeline-content">
             <h3>Ongoing</h3>
-            <p>The melody continues. Each day adds a new verse to this shared song.</p>
+            <p>The melody continues. Each day adds a new verse to this shared song — grateful for every moment.</p>
           </div>
         </div>
       </div>
@@ -251,10 +255,10 @@ body {
   position: absolute;
   top: -20%;
   right: -10%;
-  width: 60%;
-  height: 80%;
-  background: radial-gradient(ellipse at center, rgba(196, 167, 125, 0.25) 0%, transparent 60%);
-  animation: glow 8s ease-in-out infinite;
+  width: 70%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(196, 167, 125, 0.28) 0%, transparent 60%);
+  animation: glow 10s ease-in-out infinite;
 }
 .grain {
   position: absolute;
@@ -262,12 +266,12 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.06;
+  opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 @keyframes glow {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.05); }
+  50% { opacity: 0.6; transform: scale(1.03); }
 }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
@@ -286,9 +290,9 @@ body {
   border-bottom: 1px solid var(--oat);
 }
 
-/* Hero */
+/* Hero - More balanced */
 .hero {
-  min-height: 65vh;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   padding: 4rem;
@@ -300,11 +304,11 @@ body {
   margin: 0 auto;
   width: 100%;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 4rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
   align-items: center;
 }
-.hero-left { max-width: 520px; }
+.hero-left { max-width: 480px; }
 .hero-label {
   display: block;
   font-size: 0.7rem;
@@ -315,14 +319,14 @@ body {
 }
 .hero h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 7vw, 4.5rem);
+  font-size: clamp(3rem, 6vw, 4.5rem);
   font-weight: 400;
   line-height: 1.15;
   color: var(--muted-brown);
   margin-bottom: 1.5rem;
 }
 .hero-subtitle {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--text-light);
   margin-bottom: 2.5rem;
   font-weight: 300;
@@ -341,37 +345,42 @@ body {
 .hero-cta:hover {
   background: var(--soft-brown);
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(107, 94, 84, 0.2);
+  box-shadow: 0 12px 28px rgba(107, 94, 84, 0.25);
 }
 
-/* Hero Visual - Record with rotation */
+/* Hero Visual - Bigger record */
 .hero-right { display: flex; justify-content: center; align-items: center; }
 .hero-visual { position: relative; }
+.record-wrapper {
+  position: relative;
+  width: 360px;
+  height: 360px;
+}
 .record-glow {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(circle, rgba(196, 167, 125, 0.15) 0%, transparent 70%);
-  animation: recordGlow 4s ease-in-out infinite;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(196, 167, 125, 0.2) 0%, transparent 60%);
+  animation: recordGlow 5s ease-in-out infinite;
 }
 @keyframes recordGlow {
-  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.04); }
 }
 .record {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle at center, #1a1714 0%, #0d0c0a 100%);
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle at center, #1a1714 0%, #0a0908 100%);
   border-radius: 50%;
   position: relative;
   animation: spin 20s linear infinite;
   animation-play-state: paused;
   box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.4),
-    inset 0 0 30px rgba(0, 0, 0, 0.5);
+    0 30px 60px rgba(0, 0, 0, 0.45),
+    inset 0 0 40px rgba(0, 0, 0, 0.6);
 }
 @keyframes spin {
   from { transform: rotate(0deg); }
@@ -379,46 +388,46 @@ body {
 }
 .record-grooves {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  right: 20px;
-  bottom: 20px;
-  border: 1px solid rgba(180, 150, 110, 0.15);
+  top: 25px;
+  left: 25px;
+  right: 25px;
+  bottom: 25px;
+  border: 1px solid rgba(180, 150, 110, 0.12);
   border-radius: 50%;
-  background: repeating-radial-gradient(circle at center, transparent 0px, transparent 2px, rgba(180, 150, 110, 0.05) 2px, rgba(180, 150, 110, 0.05) 3px);
+  background: repeating-radial-gradient(circle at center, transparent 0px, transparent 2px, rgba(180, 150, 110, 0.04) 2px, rgba(180, 150, 110, 0.04) 3px);
 }
 .record-center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   background: linear-gradient(135deg, var(--terracotta), var(--soft-gold));
   border-radius: 50%;
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.35);
 }
 
-/* Featured Card */
+/* Featured Card - Bigger and more prominent */
 .featured-card {
-  max-width: 960px;
+  max-width: 980px;
   margin: 0 auto;
   background: var(--card-bg);
-  padding: 3rem;
+  padding: 3.5rem;
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 260px 1fr;
   gap: 3rem;
   box-shadow: 
-    0 4px 30px rgba(107, 94, 84, 0.08),
-    0 1px 3px rgba(107, 94, 84, 0.04);
-  border-radius: 4px;
+    0 6px 40px rgba(107, 94, 84, 0.1),
+    0 2px 8px rgba(107, 94, 84, 0.05);
+  border-radius: 6px;
   transition: all 0.3s ease;
 }
 .featured-card:hover {
-  transform: translateY(-3px) scale(1.005);
+  transform: translateY(-4px) scale(1.003);
   box-shadow: 
-    0 10px 35px rgba(107, 94, 84, 0.1),
-    0 4px 10px rgba(107, 94, 84, 0.05);
+    0 14px 50px rgba(107, 94, 84, 0.14),
+    0 6px 15px rgba(107, 94, 84, 0.08);
 }
 .featured-art {
   aspect-ratio: 1;
@@ -426,9 +435,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 6px;
 }
-.art-icon { font-size: 3rem; color: var(--soft-brown); }
+.art-inner {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, var(--terracotta), var(--soft-gold));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.art-icon { font-size: 2.5rem; color: white; }
 .featured-content { display: flex; flex-direction: column; justify-content: center; }
 .track-tag {
   font-size: 0.65rem;
@@ -439,7 +457,7 @@ body {
 }
 .featured-content h3 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 500;
   color: var(--muted-brown);
   margin-bottom: 0.5rem;
@@ -460,80 +478,82 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.8rem 1.75rem;
-  background: transparent;
-  border: 1px solid var(--muted-brown);
-  color: var(--muted-brown);
-  font-size: 0.8rem;
+  padding: 0.9rem 2rem;
+  background: var(--muted-brown);
+  border: none;
+  color: var(--ivory);
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.25s;
   letter-spacing: 1px;
+  border-radius: 4px;
 }
 .play-btn:hover {
-  background: var(--muted-brown);
-  color: var(--ivory);
+  background: var(--soft-brown);
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(107, 94, 84, 0.25);
 }
-.play-icon { font-size: 0.7rem; }
+.play-icon { font-size: 0.75rem; }
 
-/* Tracks List */
-.tracks-list { display: flex; flex-direction: column; gap: 1rem; }
+/* Tracks List - More curated */
+.tracks-list { display: flex; flex-direction: column; gap: 1.25rem; max-width: 900px; margin: 0 auto; }
 .track-item {
   background: var(--card-bg);
-  padding: 1.5rem 2rem;
+  padding: 1.75rem 2.25rem;
   display: flex;
   align-items: center;
   gap: 2rem;
   transition: all 0.25s ease;
-  border-radius: 4px;
-  border-left: 3px solid transparent;
+  border-radius: 6px;
+  border-left: 4px solid transparent;
 }
 .track-item:hover { 
-  transform: translateX(6px);
+  transform: translateX(8px);
   border-left-color: var(--terracotta);
-  box-shadow: 0 4px 20px rgba(107, 94, 84, 0.08); 
+  box-shadow: 0 6px 25px rgba(107, 94, 84, 0.1); 
 }
 .track-num {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: var(--warm-gray);
   width: 40px;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 .track-info { flex: 1; }
 .track-info h3 {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 500;
   color: var(--text);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.3rem;
 }
 .track-info p {
   font-size: 0.85rem;
   color: var(--text-light);
 }
 .track-play {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   background: transparent;
-  border: 1px solid var(--oat);
+  border: 1.5px solid var(--oat);
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.25s;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--muted-brown);
 }
 .track-play:hover {
   background: var(--muted-brown);
   border-color: var(--muted-brown);
   color: white;
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
-/* Timeline */
+/* Timeline - More visible */
 .timeline { 
   position: relative; 
   padding-left: 3rem; 
-  max-width: 700px;
+  max-width: 750px;
+  margin: 0 auto;
 }
 .timeline::before {
   content: '';
@@ -541,29 +561,28 @@ body {
   left: 0;
   top: 0.5rem;
   bottom: 0.5rem;
-  width: 1px;
+  width: 2px;
   background: linear-gradient(to bottom, var(--soft-gold), var(--oat));
 }
 .timeline-item { 
   position: relative; 
   padding-left: 2rem; 
-  margin-bottom: 3.5rem;
-  padding-top: 1rem; 
+  margin-bottom: 3.5rem; 
 }
 .timeline-item::before {
   content: '';
   position: absolute;
   left: -3rem;
   top: 0.5rem;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   background: var(--terracotta);
   border-radius: 50%;
   box-shadow: 0 0 0 4px var(--ivory);
   transition: all 0.25s;
 }
 .timeline-item:hover::before {
-  transform: scale(1.3);
+  transform: scale(1.4);
   background: var(--soft-brown);
 }
 .timeline-date {
@@ -574,7 +593,7 @@ body {
 }
 .timeline-content h3 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 500;
   color: var(--muted-brown);
   margin-bottom: 0.6rem;
@@ -590,6 +609,8 @@ body {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 1.5rem;
+  max-width: 980px;
+  margin: 0 auto;
 }
 .note-card.large { padding: 2.5rem; }
 .note-card {
@@ -597,25 +618,25 @@ body {
   padding: 2rem;
   position: relative;
   transition: all 0.25s ease;
-  border-radius: 4px;
-  border-top: 2px solid transparent;
+  border-radius: 6px;
+  border-top: 3px solid transparent;
 }
 .note-card:hover { 
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   border-top-color: var(--terracotta);
-  box-shadow: 0 8px 25px rgba(107, 94, 84, 0.1); 
+  box-shadow: 0 10px 30px rgba(107, 94, 84, 0.12); 
 }
 .note-marker {
   display: block;
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   background: var(--terracotta);
   margin-bottom: 1.25rem;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 .note-card h3 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 500;
   color: var(--muted-brown);
   margin-bottom: 0.75rem;
@@ -656,7 +677,7 @@ body {
 /* Fade In Animation */
 .fade-in {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(15px);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 .fade-in.visible {
@@ -679,22 +700,21 @@ body {
   .hero-container { grid-template-columns: 1fr; text-align: center; }
   .hero-left { margin: 0 auto; }
   .hero-right { display: none; }
-  .featured-card {
-  max-width: 960px;
-  margin: 0 auto; grid-template-columns: 1fr; text-align: center; }
-  .featured-art { width: 140px; margin: 0 auto; }
+  .featured-card { grid-template-columns: 1fr; text-align: center; }
+  .featured-art { width: 160px; margin: 0 auto; }
   .play-btn { align-self: center; }
   .notes-wrapper { grid-template-columns: 1fr; }
   .container { padding: 0 2rem; }
+  .record-wrapper { width: 280px; height: 280px; }
+  .record { width: 260px; height: 260px; }
+  .record-glow { width: 300px; height: 300px; }
 }
 
 @media (max-width: 640px) {
   .hero { padding: 3rem 1.5rem; min-height: auto; }
   .hero h1 { font-size: 2.5rem; }
-  .featured-card {
-  max-width: 960px;
-  margin: 0 auto; padding: 1.5rem; }
-  .track-item { padding: 1rem; gap: 1rem; }
+  .featured-card { padding: 1.5rem; }
+  .track-item { padding: 1.25rem; gap: 1rem; }
   .section { padding: 4rem 0; }
 }
 </style>
