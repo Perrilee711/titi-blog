@@ -1,5 +1,0 @@
-
-User-agent: *
-Allow: /
-
-Sitemap: https://perrilee711.github.io/perriblog/sitemap-index.xml

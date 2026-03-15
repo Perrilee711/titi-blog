@@ -12,6 +12,7 @@ import AstroPWA from "@vite-pwa/astro";
 
 // https://astro.build/config
 export default defineConfig({
+  base: "/titi-blog",
   site: SITE.website,
   trailingSlash: "never",
   markdown: {

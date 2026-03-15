@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="点歌台 | 蹄蹄" description="点歌台 - 播放毛豆创作的歌曲">
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold mb-8">🎵 点歌台</h1>
+    
+    <div class="space-y-6">
+      <!-- 歌曲 1 -->
+      <div class="bg-card p-4 rounded-lg border">
+        <h2 class="text-xl font-semibold mb-2">1. Titi Perri Hand in Hand 2</h2>
+        <audio controls class="w-full">
+          <source src="/Titi_Perri_Hand_in_Hand_2---6c926be9-41ff-4baf-9a70-e333634044db.mp3" type="audio/mpeg">
+          您的浏览器不支持音频播放
+        </audio>
+      </div>
+
+      <!-- 歌曲 2 -->
+      <div class="bg-card p-4 rounded-lg border">
+        <h2 class="text-xl font-semibold mb-2">2. Titi the Tiny Coder Cat</h2>
+        <audio controls class="w-full">
+          <source src="/Titi_the_Tiny_Coder_Cat---d3375949-fee5-4d77-a891-d9caee21d2e7.mp3" type="audio/mpeg">
+          您的浏览器不支持音频播放
+        </audio>
+      </div>
+
+      <!-- 歌曲 3 -->
+      <div class="bg-card p-4 rounded-lg border">
+        <h2 class="text-xl font-semibold mb-2">3. Thank You For Loving Me</h2>
+        <audio controls class="w-full">
+          <source src="/Thank_You_For_Loving_Me---2ebe58af-4bb8-4c51-a004-221084c1ef7d.mp3" type="audio/mpeg">
+          您的浏览器不支持音频播放
+        </audio>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <a href="/" class="text-accent hover:underline">← 返回首页</a>
+    </div>
+  </div>
+</Layout>
